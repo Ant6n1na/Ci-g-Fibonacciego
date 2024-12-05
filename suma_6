@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<long long> fibonacci_sequence(int n) {
+    vector<long long> fib = {1, 1};
+    for (int i = 2; i < n; i++) fib.push_back(fib[i - 1] + fib[i - 2]);
+    return fib;
+}
+
+string to_binary(long long num) {
+    string bin = "";
+    while (num > 0) {
+        if (num % 2 == 0) bin = "0" + bin;
+        else bin = "1" + bin;
+        num /= 2;
+    }
+    return bin;
+}
+
+int main() {
+    vector<long long> fib = fibonacci_sequence(40);
+
+    for (long long num : fib) {
+        string bin = to_binary(num);
+        int ones_count = 0;
+        for (char c : bin) {
+            if (c == '1') ones_count++;
+        }
+        if (ones_count == 6) {
+            cout << bin << endl;
+        }
+    }
+
+    return 0;
+}
