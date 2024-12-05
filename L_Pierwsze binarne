@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+vector<long long> fibonacci_sequence(int n) {
+    vector<long long> fibonacci_numbers = {1, 1};
+    for (int i = 2; i < n; i++) {
+        fibonacci_numbers.push_back(fibonacci_numbers[i - 1] + fibonacci_numbers[i - 2]);
+    }
+    return fibonacci_numbers;
+}
+
+bool is_prime(long long number) {
+    if (number < 2) return false;
+    for (long long i = 2; i <= sqrt(number); i++) {
+        if (number % i == 0) return false;
+    }
+    return true;
+}
+
+string to_binary(long long number) {
+    string binary = "";
+    do {
+        binary = char('0' + (number % 2)) + binary;
+        number /= 2;
+    } while (number > 0);
+    return binary;
+}
+
+int main() {
+    vector<long long> fibonacci_40 = fibonacci_sequence(40);
+
+    for (long long number : fibonacci_40) {
+        if (is_prime(number)) {
+            cout << to_binary(number) << endl;
+        }
+    }
+
+    return 0;
+}
